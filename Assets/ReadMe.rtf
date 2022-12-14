@@ -1,1 +1,26 @@
+SCRIPTS
+Genel Bakış
+Temel Döngü
+Oyuncuyu sağ tarafa yönlendiririz. Gidebildiğimiz kadar gittikten sonra sağ tarafta bulunan eşyaları oyuncunun üzerine sürükleyerek ortaya alırız. Almak istediklerimizi aldıktan sonra en sola gideriz ve belli bir mesafe yakınlaştıktan sonra tüm eşyalar içeri girer. Eğer oyuncu ile tekrar sağ tarafa gidersek, tüm parçalar tekrar hareket edilebilir oluyor. Bu bir bug fakat bunu yaptıktan sonra alışveriş sepetinin içerisindeki eşyaları çıkartıp rafa tekrar getirirsek, alışveriş sepetinin tutarı ona göre düşmektedir. Eğer sağ tarafa gitmeden düzenleme bool’u “true” yapılırsa sol kısımda da alışveriş sepeti rahatça düzenlenebilir olur.
+CheckOut dedikten sonra Assets/Output içerisinde “receipt” isimli dosyanın içerisinde bilgiler yazılmaktadır. 
+Kod Düzeni Eğilimim
+Region’lara bölerek, her region’da ne olduğunu bilir ve yerlerini standardize etmeye çalışarak değişiklikler yapmak için veya okunulabilir olması için hep aynı düzende yazma çalışırım. Genellikle biraz daha komplike sınıflarda bu işlemi yaparım.
+Eksik Yaptıklarım
+Unity Built-in veyahut C# Event sistemlerinin kullanılmaması doğrultusunda daha “decoupled” sınıflar yazılamamıştır.
+Genel bir yönetici sınıf yazılmadığı gerekçesiyle, referans alınan değerler optimize olmayan yöntemlerle yapılmıştır.
+Player
+PlayerController – Transform bazlı x eksenine sınırlı hareket etme kontrolcüsü. A ve D butonları ile kontrolü sağlanmaktadır.
+PlayerDistanceToAction – Trigger veyahut Collider yerine, uzaklığa bakarak bool alma yöntemlerinin olduğu sınıf.
 
+CheckOut
+CheckOutCase – Prensiplere ters olarak, arayüz güncelleme, oyuncu üzerindeki eşyaları alıp sepete aktarma ve buton metotlarını içeren sınıftır.
+Receipt – CheckOut butonuna tıkladıktan sonra fiş yazdırma işleminin metodunu taşıyan sınıf.
+
+DragDrop
+DragPiece – Bu sınıfa sahip bütün objeler fare ile taşınılabilir yapılmıştır. Fakat, taşınılabilmesi için, oyuncunun ekranın sağ tarafına yakın olması gerekir. Oyuncunun üzerine eşyalar sürüklenerek oyuncunun üzerine eşyalar alınılabilir.
+DropArea – Bu script’e sahip olan olan objelere “startingPoint” isimli boş bir oyun objesi atandığı sürece, sürüklenen parçaları kendi üzerinde toplayabilir. DropArea’nın olduğu objenin yakınına sürüklenen objenin bırakılması gerekiyordur.
+Products
+Product – Ürün alt sınıflarının baz sınıfıdır. Alt sınıflardaki bir değişken ve bu ana sınıftaki değişken ile “inspector” üzerinde dizaynır dostu script yazılmak amaçlanmıştır.
+Book, CD, Food, Magazine – Alt Sınıflar
+TextWriting
+TextWriter – Yazma işlemlerini halleden statik sınıftır. Bu sınıf kullanılarak belirlenen dosyaya yazdırma ve okuma işlemi yaptırılmaktadır.

@@ -7,7 +7,7 @@ public class Receipt : MonoBehaviour
 {
     public void WriteProducts(List<Product> products)
     {
-        TextWriter.Clean();
+        TextWriter.Clean("receipt");
         //Writing receipt for the products that are purchased. Issue is to reach their child object dynamically to Invoke one specific method for each child class.
         //Better solution for readability or modularity has not yet to be developed.
         for (int i = 0; i < products.Count; i++)
@@ -15,26 +15,28 @@ public class Receipt : MonoBehaviour
             if (products[i] is Book)
             {
                 Book x = (Book)products[i];
-                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice());
+                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice(),"receipt");
             }
             else if (products[i] is Magazine)
             {
                 Magazine x = (Magazine)products[i];
-                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice());
+                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice(), "receipt");
+
             }
             else if (products[i] is CD)
             {
                 CD x = (CD)products[i];
-                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice());
+                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice(), "receipt");
+
             }
             else if (products[i] is Food)
             {
                 Food x = (Food)products[i];
-                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice());
+                TextWriter.Write("Product Type: " + products[i].GetType().Name + "," + x.GetTypeOf() + "\nName: " + products[i].GetName() + "\nPrice: " + products[i].GetPrice(), "receipt");
             }
         }
 
-        TextWriter.Write("\nTotal: " + TotalCost(products));
+        TextWriter.Write("\nTotal: " + TotalCost(products),"receipt");
     }
     float TotalCost(List<Product> products)
     {

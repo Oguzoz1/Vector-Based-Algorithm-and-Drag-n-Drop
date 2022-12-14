@@ -1,0 +1,8 @@
+ Product Type: Magazine,BUSINESS
+Name: Bloomberg
+Price: 3.99
+Product Type: Food,SWEET
+Name: Cake
+Price: 4.99
+
+Total: 8.98

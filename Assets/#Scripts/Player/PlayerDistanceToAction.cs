@@ -8,6 +8,7 @@ public class PlayerDistanceToAction : MonoBehaviour
     [SerializeField] private Transform shelf;
     [SerializeField] private Transform checkOut;
 
+    //Rough and strict way of checking but non-harmful due to project size.
     public bool CanDrag()
     {
         if (Vector2.Distance(transform.position, shelf.position) <= 2f) return true;

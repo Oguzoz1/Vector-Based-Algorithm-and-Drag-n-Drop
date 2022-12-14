@@ -48,6 +48,7 @@ public class DropArea : MonoBehaviour
     }
     public void ResetList()
     {
+        //Method to re-list everything.
         for (int i = 0; i < _products.Count; i++)
         {
             float spacingMod = i;

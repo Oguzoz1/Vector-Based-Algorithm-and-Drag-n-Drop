@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerDistanceToAction))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Controller Settings")]
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     }
     void TransformMovement()
     {
+        //Unorthodox but visually appealing way of restricting movement
         bool canMoveRight = transform.position.x <= xBorder;
         bool canMoveLeft = transform.position.x >= -xBorder;
 

@@ -46,6 +46,7 @@ public class CheckOutCase : MonoBehaviour
     }
     void TransferProducts()
     {
+        //Acting upon checking distance
         if (distanceToAction.canCheckOut())
         {
             if (!_isProductsTransfered && playerArea._products.Count > 0)
@@ -89,6 +90,7 @@ public class CheckOutCase : MonoBehaviour
     #region Check Out Logic
     public void CheckOut()
     {
+        //Called by Button Event.
         var products = ToProducts(checkOutArea._products);
         receipt.WriteProducts(products);
     }

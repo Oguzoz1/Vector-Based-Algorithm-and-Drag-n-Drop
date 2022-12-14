@@ -48,6 +48,7 @@ public class DragPiece : MonoBehaviour
     #region Main Logic
     void MainLogic()
     {
+        //Restricting drag by checking if player close to shelf.
         if(playerActionDistance.CanDrag()) Drag();
     }
     void Drag()
@@ -59,6 +60,7 @@ public class DragPiece : MonoBehaviour
     }
     void Drop()
     {
+        //Between all dropareas, it can be dynamically dropped and taken.
         _isDragged = false;
         if (GetDropArea() == null) ResetPosInAllAreas();
         else if (Vector2.Distance(transform.position, GetDropArea().transform.position) <= GetDropArea().PlaceDistance) SetPosForArea(GetDropArea());
@@ -68,10 +70,12 @@ public class DragPiece : MonoBehaviour
     #region Methods
     void ResetPosInAllAreas()
     {
+        //To Reset lists in all areas.
         foreach (DropArea dropArea in dropAreas) transform.position = dropArea.ResetPos(gameObject, _originalPosition);
     }
     void SetPosForArea(DropArea area)
     {
+        //To Reset Lists in all areas except designated one.
         transform.position = area.ListPos(gameObject);
         foreach (DropArea dropArea in dropAreas) if (dropArea != area) dropArea.ResetPos(gameObject, _originalPosition);
     }

@@ -53,4 +53,24 @@ public class TransformationMatrix : MonoBehaviour
 
         return localMatrix.MultiplyVector(new Vector3(localTransform.x, localTransform.y, 1));
     }
+
+    void TransformationMatrixUsage()
+    {
+        Matrix4x4 localToWorldMtx = transform.localToWorldMatrix;
+
+        // Functions to do space transformations between local and world.
+        // transform.TransformPoint() // M*(v.x, v.y, v.z, 1) -> local to world func: localtoworldmatrix * our vector, 1/0
+        // transform.InverseTransformPoint () // M^1*(v.x, v.y, v.z, 1) -> world to local func:
+
+
+        //Freya Example: Assuming we need an offset for a weapon to spawn a bullet. Offset location will be relative to position of the weapon.
+        //Thus, offset must be transformed from local to world to be able to spawn.
+        //transform.TransformPoint(localOffset); is used to determine this.
+
+        //What direction an object moving in relative to another object:
+        //From Object B to object A, direction vector is in a world position. We might want that in local space.
+        //Thus, we would know exacty x and y relative to Object B.
+        //Such as crew wants to know the location of enemy relative to their ship.
+        // transform.TransformVector(direction vector world); // M*(v.x, v.y, v.z, 0)
+    }
 }

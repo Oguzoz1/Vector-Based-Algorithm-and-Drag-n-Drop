@@ -8,7 +8,18 @@ public class ConvertLocalToWorldPos : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(LocalToWorld(localCoordinates), .1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Vector2.zero, Vector2.right);
+        Gizmos.DrawLine(transform.position, transform.position + transform.right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up);
+        Gizmos.DrawLine(Vector2.zero, Vector2.up);
+
+
+
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(LocalToWorld(localCoordinates), .05f);
     }
     Vector2 LocalToWorld(Vector2 local)
     {

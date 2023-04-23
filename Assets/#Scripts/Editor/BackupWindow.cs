@@ -3,9 +3,11 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Threading;
 
 public class BackupWindow : EditorWindow
 {
+    private string _version;
     private string _author;
     private string _description;
     private string _link;
@@ -54,6 +56,12 @@ public class BackupWindow : EditorWindow
         EditorGUILayout.LabelField("Author:");
         GUI.color = string.IsNullOrEmpty(_author) ? Color.red : Color.green;
         _author = EditorGUILayout.TextField(_author, GUILayout.Width(200), GUILayout.Height(20));
+
+        GUI.color = Color.white;
+        //Version
+        EditorGUILayout.LabelField("Version(ex: v1,v2...):");
+        GUI.color = string.IsNullOrEmpty(_version) ? Color.red : Color.green;
+        _version = EditorGUILayout.TextField(_version, GUILayout.Width(50), GUILayout.Height(20));
 
         //Description
         if (!string.IsNullOrEmpty(_author))
@@ -116,9 +124,13 @@ public class BackupWindow : EditorWindow
     }
     private void BackUp()
     {
-        InitialiseBackupTextFile(_savePath, "Test1");
+        //WE NEED TO MAKE SURE WE ARE COPYING THE RIGHT FILES.
+        string fileName = Path.GetFileName(_loadPath);
+        InitialiseBackupTextFile(fileName + "_" + _version, _savePath);
+        CreateZip(fileName + "_" + _version, _loadPath);
     }
-    private void InitialiseBackupTextFile(string savePath, string fileName)
+   
+    private void InitialiseBackupTextFile(string fileName, string savePath)
     {
         fileName = fileName + ".txt";
         string newSavePath = Path.Combine(savePath, fileName);
@@ -132,16 +144,16 @@ public class BackupWindow : EditorWindow
                 sw.WriteLine("Description: \n" + _description);
                 sw.WriteLine("Link: " + _link);
                 sw.Flush();
-                sw.Close();
             }
         }
     }
     private void CreateZip(string name,string sourcePath)
     {
-        string zipLocationPath = Path.Combine(sourcePath, name + ".zip");
-        if (!File.Exists(sourcePath))
+        string zipLocationPath = Path.Combine(_savePath, name + ".zip");
+        if (!File.Exists(zipLocationPath))
         {
-            ZipFile.CreateFromDirectory(sourcePath, zipLocationPath, System.IO.Compression.CompressionLevel.Optimal, false);
+            ZipFile.CreateFromDirectory(sourcePath, zipLocationPath, System.IO.Compression.CompressionLevel.Optimal, true);
         }
     }
+ 
 }
